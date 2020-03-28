@@ -27,7 +27,10 @@ class Navbar extends Component {
                     </button>
                     <div className={`${classOne}`} id="navbarResponsive">
                         <ul className="navbar-nav ml-auto">
-                            <li className="nav-item active">
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/create">Create Session</NavLink>
+                            </li>
+                            <li className="nav-item">
                                 <NavLink className="nav-link" to="/about">About</NavLink>
                             </li>
                             <li className="nav-item">
