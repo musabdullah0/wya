@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import { connect } from 'react-redux'
 import { compose } from 'redux'
+import MAPS_API_KEY from '../../config'
 
 class StudyMap extends Component {
 
@@ -60,7 +61,7 @@ const mapStateToProps = (state) => {
 export default compose(
     connect(mapStateToProps),
     GoogleApiWrapper({
-        apiKey: 'AIzaSyBNNJQot0Gv7zqN0f2N1tv-pqDO4_fn_FE'
+        apiKey: MAPS_API_KEY
     }))
     (StudyMap)
 
