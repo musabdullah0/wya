@@ -2,7 +2,6 @@ import React from 'react'
 import TimeField from 'react-simple-timefield';
 
 const TimePicker = (props) => {
-    console.log(props)
     let today = new Date();
     let now = today.getHours() + ':' + today.getMinutes();
     return (

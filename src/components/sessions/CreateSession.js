@@ -6,7 +6,7 @@ class CreateSession extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            time: '02:00 AM',
+            time: '',
             location: '',
             subject: '',
             group: ''
