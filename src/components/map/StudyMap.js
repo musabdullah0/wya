@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { Map, GoogleApiWrapper } from 'google-maps-react';
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import MAPS_API_KEY from '../../config'
+import MarkerList from './MarkerList'
 
 class StudyMap extends Component {
 
@@ -14,20 +15,6 @@ class StudyMap extends Component {
                 lng: -97.652851
             }        
         }
-    }
-
-    dropMarkers() {
-        return this.props.sessions.map(session => (
-            <Marker 
-                session={session} 
-                key={session.id}
-                position={{ lat: session.latitude, lng: session.longitude }}
-                label={{
-                    text: session.subject,
-                    fontWeight: 'bold'
-                }}
-            />
-        ))
     }
 
     render() {
@@ -45,7 +32,7 @@ class StudyMap extends Component {
                     zoom={15}
                     initialCenter={this.state.center}
                 >
-                {this.dropMarkers()}
+                <MarkerList sessions={this.props.sessions} />
                 </Map>
             </div>
         )
