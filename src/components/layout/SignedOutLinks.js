@@ -1,17 +1,17 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { NavItem } from 'reactstrap';
 
-const SignedOutLinks = () => {
+
+const SignedOutLinks = (props) => {
   return (
     <div>
-      <ul className="right">
-        <li className="nav-item">
-            <NavLink className="nav-link" to="/login">Log In</NavLink>
-        </li>
-        <li className="nav-item">
-            <NavLink className="nav-link" to="/sign-up">Sign Up</NavLink>
-        </li>
-      </ul>
+      <NavItem {...props} >
+          <NavLink to="/login">login</NavLink>
+      </NavItem>
+      <NavItem {...props}>
+          <NavLink to="/sign-up" >sign up</NavLink>
+      </NavItem>
     </div>
   )
 }

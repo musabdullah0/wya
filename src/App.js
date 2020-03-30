@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Navbar from './components/layout/Navbar'
+import Navigation from './components/layout/Navigation'
 import About from './components/pages/About'
 import Contact from './components/pages/Contact'
 import CreateSession from './components/sessions/CreateSession'
@@ -14,14 +14,15 @@ class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                <Navbar />
+                <Navigation />
                 <Switch>
                     <Route exact path='/' component={StudyMap} />
                     <Route path='/create' component={CreateSession} />
                     <Route path='/about' component={About} />
                     <Route path='/contact' component={Contact} />
-                    <Route path ='/login' component={LogIn} />
                     <Route path = '/add-friend' component={AddFriend}/>
+                    {/* logged out links*/}
+                    <Route path ='/login' component={LogIn} />
                     <Route path = '/sign-up' component={SignUp}/>
                 </Switch>
             </BrowserRouter>
