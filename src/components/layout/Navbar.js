@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import SignedOutLinks from './SignedInLinks'
-import SignedInLinks from './SignedOutLinks'
+import SignedInLinks from './SignedInLinks'
+import SignedOutLinks from './SignedOutLinks'
 import { connect } from 'react-redux'
 
 class Navbar extends Component {
@@ -13,6 +13,7 @@ class Navbar extends Component {
         };
     }
     toggleNavbar() {
+        console.log('toggle pressed')
         this.setState({
             collapsed: !this.state.collapsed,
         });
@@ -25,10 +26,16 @@ class Navbar extends Component {
             <nav className="navbar navbar-expand-sm navbar-dark bg-dark transparent-nav">
                 <div className="container">
                     <NavLink className="navbar-brand" to="/">Study Mode</NavLink>
-                    <button onClick={this.toggleNavbar} className={`${classTwo}`} type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <button 
+                        onClick={this.toggleNavbar} className={`${classTwo}`} 
+                        type="button" data-toggle="collapse" data-target="#navbarResponsive" 
+                        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon" />
                     </button>
-                    <SignedInLinks />
+                    <SignedInLinks 
+                        containerClasses={`${classOne}`} 
+                        toggleNavbar = {this.toggleNavbar}
+                    />
                     <SignedOutLinks />
                 </div>
             </nav>

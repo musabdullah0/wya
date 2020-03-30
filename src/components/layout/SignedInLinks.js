@@ -5,8 +5,9 @@ import { signOut } from '../../store/actions/authActions'
 
 const SignedInLinks = (props) => {
   return (
-    <div>
-      <ul className="right">
+    <div className={props.containerClasses} >
+      
+      <ul className="navbar-nav ml-auto">
          <li className="nav-item">
             <NavLink className="nav-link" to="/add-friend">Add A Friend</NavLink>
         </li>
@@ -20,7 +21,7 @@ const SignedInLinks = (props) => {
             <NavLink className="nav-link" to="/contact">Contact</NavLink>
         </li>
         <li className="nav-item">
-            <a onClick={props.signOut}>Log Out</a>
+            <button className="nav-link btn-dark" onClick={props.signOut}>Log Out</button>
         </li>
       </ul>
     </div>
@@ -29,8 +30,8 @@ const SignedInLinks = (props) => {
 
 const mapDispatchToProps=(dispatch)=>{
   return{
-    signOut: ()=> dispatch(signOut())
+    signOut: () => dispatch(signOut())
   }
 }
 
-export default connect(null,mapDispatchToProps)(SignedInLinks)
+export default connect(null, mapDispatchToProps)(SignedInLinks)

@@ -2,12 +2,8 @@ import React, { Component } from 'react'
 import { Map, GoogleApiWrapper } from 'google-maps-react';
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-<<<<<<< HEAD
-import MAPS_API_KEY from '../../config'
+import MAPS_API_KEY from '../../config/mapConfig'
 import MarkerList from './MarkerList'
-=======
-import MAPS_API_KEY from '../../mapsConfig'
->>>>>>> 45cd91fc0b6f45f761e69866e96949a7935f03c8
 
 class StudyMap extends Component {
 
