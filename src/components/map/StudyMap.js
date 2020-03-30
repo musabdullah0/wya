@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import MAPS_API_KEY from '../../config'
+import MAPS_API_KEY from '../../mapsConfig'
 
 class StudyMap extends Component {
 
