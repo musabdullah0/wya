@@ -20,6 +20,11 @@ const SignedInLinks = (props) => {
       <NavItem {...props}>
           <NavLink to="/contact" >contact</NavLink>
       </NavItem>
+      <NavItem {...props}>
+          <NavLink to="/log-in" >
+            <a onClick={props.signOut}>log out</a>
+          </NavLink>
+      </NavItem>
     </div>
   )
 }

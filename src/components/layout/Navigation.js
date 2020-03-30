@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import { Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem, Nav } from 'reactstrap';
+import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav } from 'reactstrap';
 import SignedInLinks from './SignedInLinks'
 import SignedOutLinks from './SignedOutLinks'
 import { connect } from 'react-redux'
@@ -36,5 +35,12 @@ class Navigation extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
 
-export default Navigation;
+    }
+}
+
+
+export default connect(mapStateToProps)(Navigation);
