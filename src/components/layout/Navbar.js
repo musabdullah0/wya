@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import SignedOutLinks from './SignedInLinks'
+import SignedInLinks from './SignedOutLinks'
+import { connect } from 'react-redux'
 
 class Navbar extends Component {
     constructor(props) {
@@ -25,22 +28,19 @@ class Navbar extends Component {
                     <button onClick={this.toggleNavbar} className={`${classTwo}`} type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon" />
                     </button>
-                    <div className={`${classOne}`} id="navbarResponsive">
-                        <ul className="navbar-nav ml-auto">
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/create">Create Session</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/about">About</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/contact">Contact</NavLink>
-                            </li>
-                        </ul>
-                    </div>
+                    <SignedInLinks />
+                    <SignedOutLinks />
                 </div>
             </nav>
         );
     }
 }
-export default Navbar;
+
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+
+    }
+}
+
+export default connect(mapStateToProps)(Navbar);
