@@ -25,12 +25,14 @@ class Navigation extends Component {
         this.state = {
             expanded: false,
         };
-        this.links = [
+        this.signedInLinks = [
             { href: '/create' , text: 'study'},
             { href: '/add-friend' , text: 'add friend'},
             { href: '/about' , text: 'about'},
             { href: '/contact' , text: 'contact'},
-            { href: '#' , text: 'logout', onClick: () => console.log('hello')},
+            { href: '#' , text: 'logout', onClick: props.signOut},
+        ]
+        this.signedOutLinks = [
             { href: '/login' , text: 'log in'},
             { href: '/signup' , text: 'sign up'},
         ]
@@ -48,7 +50,7 @@ class Navigation extends Component {
                     <NavbarToggler onClick={this.toggleNavbar} />
                     <Collapse isOpen={this.state.expanded} navbar>
                         <Nav className="ml-auto" navbar>
-                            {this.links.map(createNavItem)}
+                            {this.signedInLinks.map(createNavItem)}
                         </Nav>
                     </Collapse>
                 </Navbar>
