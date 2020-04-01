@@ -1,18 +1,41 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav } from 'reactstrap';
-import SignedInLinks from './SignedInLinks'
-import SignedOutLinks from './SignedOutLinks'
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+  } from 'reactstrap';
 import { connect } from 'react-redux'
+import { signOut } from '../../store/actions/authActions'
+
+
+
+const createNavItem = ({ href, text, className, onClick }, i) => (
+    <NavItem  key={i}>
+      <NavLink href={href} className={className} onClick={onClick}>{text}</NavLink>
+    </NavItem>
+  );
 
 class Navigation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            expanded: true,
+            expanded: false,
         };
+        this.links = [
+            { href: '/create' , text: 'study'},
+            { href: '/add-friend' , text: 'add friend'},
+            { href: '/about' , text: 'about'},
+            { href: '/contact' , text: 'contact'},
+            { href: '#' , text: 'logout', onClick: () => console.log('hello')},
+            { href: '/login' , text: 'log in'},
+            { href: '/signup' , text: 'sign up'},
+        ]
     }
     toggleNavbar = () => {
-        console.log('toggle pressed')
         this.setState({
             expanded: !this.state.expanded,
         });
@@ -20,16 +43,15 @@ class Navigation extends Component {
     render() {
         return (
             <div className="container">
-            <Navbar color="faded" light expand="md" className="pb-2">
-                <NavbarBrand href="/" className="mr-auto">studymode</NavbarBrand>
-                <NavbarToggler onClick={this.toggleNavbar} className="mr-2 white" />
-                <Collapse isOpen={!this.state.expanded} navbar>
-                <Nav navbar>
-                    <SignedInLinks />
-                    <SignedOutLinks />
-                </Nav>
-                </Collapse>
-            </Navbar>
+                <Navbar color="light" light expand="md">
+                    <NavbarBrand href="/">studymode</NavbarBrand>
+                    <NavbarToggler onClick={this.toggleNavbar} />
+                    <Collapse isOpen={this.state.expanded} navbar>
+                        <Nav className="ml-auto" navbar>
+                            {this.links.map(createNavItem)}
+                        </Nav>
+                    </Collapse>
+                </Navbar>
             </div>
         );
     }
@@ -42,5 +64,11 @@ const mapStateToProps = (state) => {
     }
 }
 
+const mapDispatchToProps=(dispatch)=>{
+    return {
+      signOut: () => dispatch(signOut())
+    }
+  }
 
-export default connect(mapStateToProps)(Navigation);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

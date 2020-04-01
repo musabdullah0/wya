@@ -23,7 +23,7 @@ class App extends Component {
                     <Route path = '/add-friend' component={AddFriend}/>
                     {/* logged out links*/}
                     <Route path ='/login' component={LogIn} />
-                    <Route path = '/sign-up' component={SignUp}/>
+                    <Route path = '/signup' component={SignUp}/>
                 </Switch>
             </BrowserRouter>
         );

@@ -2,30 +2,28 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { signOut } from '../../store/actions/authActions'
-import { NavItem } from 'reactstrap';
+import { NavItem, Nav } from 'reactstrap';
 
 
 const SignedInLinks = (props) => {
   return (
-    <div>
-      <NavItem {...props} >
-          <NavLink to="/create/">study</NavLink>
-      </NavItem>
-      <NavItem {...props}>
+    <Nav className="ml-auto" navbar {...props}>
+        <NavItem>
+          <NavLink to="/create">study</NavLink>
+        </NavItem>
+        <NavItem>
           <NavLink to="/add-friend" >add friend</NavLink>
-      </NavItem>
-      <NavItem {...props}>
+        </NavItem>
+        <NavItem>
           <NavLink to="/about" >about</NavLink>
-      </NavItem>
-      <NavItem {...props}>
+        </NavItem>
+        <NavItem>
           <NavLink to="/contact" >contact</NavLink>
-      </NavItem>
-      <NavItem {...props}>
-          <NavLink to="/log-in" >
-            <a onClick={props.signOut}>log out</a>
-          </NavLink>
-      </NavItem>
-    </div>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/logout" onClick={props.signOut}>log out</NavLink>
+        </NavItem>
+    </Nav>
   )
 }
 
