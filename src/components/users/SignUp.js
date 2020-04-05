@@ -14,9 +14,10 @@ class SignUp extends Component {
   }
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.SignUp(this.state);
   }
   render() {
+    const {authError} = this.props;
     return (
       <div className="container mt-5">
         <form className="white" onSubmit={this.handleSubmit}>
@@ -39,6 +40,9 @@ class SignUp extends Component {
           </div>
           <div className="input-field">
             <button className="btn pink lighten-1 z-depth-0">Sign Up</button>
+            <div className = "red-text center">
+                {authError ? <p>messed up the signup, stooopid</p>: null}
+              </div>
           </div>
         </form>
       </div>
