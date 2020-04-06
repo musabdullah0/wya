@@ -6,6 +6,7 @@ const initState = {
     switch(action.type){
       case 'SIGNUP_ERROR':
         console.log('sign up error');
+        console.log(action.err)
         return{
           ...state,
           authError: action.message

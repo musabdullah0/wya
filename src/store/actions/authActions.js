@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import firestore from 'firestore'
 
 export const signIn = (credentials) => {
   return ( dispatch, getState) => {
@@ -17,13 +18,18 @@ export const signIn = (credentials) => {
   }
 }
 
-export const signUp = (credentials)=>{
+export const signUp = (credentials) => {
   return(dispatch, getState) =>{
     firebase.auth().createUserWithEmailAndPassword(
       credentials.email, credentials.password
-    ).then(() => {
+    ).then((resp) => {
+      return firestore.collection('users').doc(resp.user.uid).set({
+        name: credentials.firstName + " "+ credentials.lastName
+      })
+    }).then(() => {
       dispatch({ type: 'SIGNUP_SUCCESS'})
-    }).catch((err) => {
+    })
+    .catch((err) => {
       dispatch({ type: 'SIGNUP_ERROR', err})
     })
   }
