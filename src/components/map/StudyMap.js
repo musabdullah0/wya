@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import MAPS_API_KEY from '../../config/mapConfig'
 import MarkerList from './MarkerList'
-import { matchPath } from 'react-router-dom';
 
 class StudyMap extends Component {
 

@@ -43,6 +43,8 @@ class Navigation extends Component {
         });
     }
     render() {
+        const { auth } = this.props
+        const links = auth.uid ? this.signedInLinks : this.signedOutLinks;
         return (
             <div className="container">
                 <Navbar color="light" light expand="md">
@@ -50,7 +52,7 @@ class Navigation extends Component {
                     <NavbarToggler onClick={this.toggleNavbar} />
                     <Collapse isOpen={this.state.expanded} navbar>
                         <Nav className="ml-auto" navbar>
-                            {this.signedInLinks.map(createNavItem)}
+                            {links.map(createNavItem)}
                         </Nav>
                     </Collapse>
                 </Navbar>
@@ -60,9 +62,8 @@ class Navigation extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
-
+        auth: state.firebase.auth
     }
 }
 
