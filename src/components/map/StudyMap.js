@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import { Map, GoogleApiWrapper } from 'google-maps-react';
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import MAPS_API_KEY from '../../config/mapConfig'
 import MarkerList from './MarkerList'
+import { matchPath } from 'react-router-dom';
 
 class StudyMap extends Component {
 
@@ -18,7 +20,11 @@ class StudyMap extends Component {
     }
 
     render() {
-
+        const { sessions, auth } = this.props;
+        if (!auth.uid){
+            console.log('u not signed in fam')
+            return <Redirect to='/login' /> 
+        } 
         const styles = {
             width: '100%',
             height: '95%',
@@ -32,7 +38,7 @@ class StudyMap extends Component {
                     zoom={15}
                     initialCenter={this.state.center}
                 >
-                <MarkerList sessions={this.props.sessions} />
+                <MarkerList sessions={sessions} />
                 </Map>
             </div>
         )
@@ -41,7 +47,8 @@ class StudyMap extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        sessions: state.session.sessions
+        sessions: state.session.sessions,
+        auth: state.firebase.auth
     }
 }
 
@@ -51,9 +58,3 @@ export default compose(
         apiKey: MAPS_API_KEY
     }))
     (StudyMap)
-
-/*
-{this.state.sessions.map(session => (
-    <StudyMarker session={session} />
-))}
-*/

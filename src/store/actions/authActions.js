@@ -39,7 +39,7 @@ export const signUp = (credentials) => {
 
 export const signOut = () => {
     return (dispatch, getState) => {
-  
+      console.log('signed out')
       firebase.auth().signOut().then(() => {
         dispatch({ type: 'SIGNOUT_SUCCESS' })
       });

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { signIn } from '../../store/actions/authActions'
 
@@ -17,7 +18,11 @@ class SignIn extends Component {
     this.props.signIn(this.state)
   }
     render() {
-      const {authError} = this.props;
+      const {auth, authError} = this.props;
+      if (auth.uid) {
+        console.log('no need to sign in, u already in fam')
+        return <Redirect to='/' /> 
+      }
       return (
         <div className="container mt-5">
           <h1 className="mb-5">Log In</h1>
@@ -46,7 +51,8 @@ class SignIn extends Component {
   }
 
   const mapStateToProps = (state) => {
-    return{
+    return {
+      auth: state.firebase.auth,
       authError: state.auth.authError
     }
   }
