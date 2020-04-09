@@ -20,24 +20,21 @@ class SignIn extends Component {
       const {authError} = this.props;
       return (
         <div className="container mt-5">
-          <h1 className="mb-5">Sign In</h1>
+          <h1 className="mb-5">Log In</h1>
           <form className="white" onSubmit={this.handleSubmit}>
-            <div className="form-group row mb-4">
-              <label htmlFor="email" className="col-2 col-form-label">Email</label>
-              <div className="col-10">
-                <input className="form-control" type="text" id='email' onChange={this.handleChange} />
-              </div>
+
+            <div className="form-group">
+              <label htmlFor="email" className="form-label">Email</label>
+              <input placeholder="email" className="form-control" type="text" id='email' onChange={this.handleChange} />
             </div>
 
-            <div className="form-group row mb-4">
-              <label htmlFor="password" className="col-2 col-form-label">Password</label>
-              <div className = "col-10">
-                <input className="form-control" type="password" id='password' onChange={this.handleChange} />
-              </div>
+            <div className="form-group">
+              <label htmlFor="password" className="form-label">Password</label>
+              <input placeholder="password" className="form-control" type="password" id='password' onChange={this.handleChange} />
             </div>
 
-            <div className="text-center">
-              <button className="btn pink lighten-1 z-depth-0">Submit</button>
+            <div className="text-center mt-5">
+              <button className="btn btn-primary">Submit</button>
               <div className = "red-text center">
                 {authError ? <p>{authError}</p>: null}
               </div>
