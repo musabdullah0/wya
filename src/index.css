@@ -8,3 +8,9 @@ body {
     margin: 0;
     padding: 0;
 }
+
+#study-btn {
+    z-index: 10;
+    position: absolute;
+    bottom: 10px;
+}

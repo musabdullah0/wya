@@ -7,17 +7,17 @@ import {
     Nav,
     NavItem,
     NavLink,
-  } from 'reactstrap';
+} from 'reactstrap';
 import { connect } from 'react-redux'
 import { signOut } from '../../store/actions/authActions'
 
 
 
 const createNavItem = ({ href, text, className, onClick }, i) => (
-    <NavItem  key={i}>
-      <NavLink href={href} className={className} onClick={onClick}>{text}</NavLink>
+    <NavItem key={i}>
+        <NavLink href={href} className={className} onClick={onClick}>{text}</NavLink>
     </NavItem>
-  );
+);
 
 class Navigation extends Component {
     constructor(props) {
@@ -26,15 +26,15 @@ class Navigation extends Component {
             expanded: false,
         };
         this.signedInLinks = [
-            { href: '/create' , text: 'study'},
-            { href: '/add-friend' , text: 'add friend'},
-            { href: '/about' , text: 'about'},
-            { href: '/contact' , text: 'contact'},
-            { href: '#' , text: 'logout', onClick: props.signOut},
+            { href: '/create', text: 'study' },
+            { href: '/add-friend', text: 'add friend' },
+            { href: '/about', text: 'about' },
+            { href: '/contact', text: 'contact' },
+            { href: '#', text: 'logout', onClick: props.signOut },
         ]
         this.signedOutLinks = [
-            { href: '/login' , text: 'log in'},
-            { href: '/signup' , text: 'sign up'},
+            { href: '/login', text: 'log in' },
+            { href: '/signup', text: 'sign up' },
         ]
     }
     toggleNavbar = () => {
@@ -43,8 +43,8 @@ class Navigation extends Component {
         });
     }
     render() {
-        const { auth } = this.props
-        const links = auth.uid ? this.signedInLinks : this.signedOutLinks;
+        // const links = auth.uid ? this.signedInLinks : this.signedOutLinks;
+        const links = this.signedInLinks;
         return (
             <div className="container">
                 <Navbar color="light" light expand="md">
@@ -67,11 +67,11 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps=(dispatch)=>{
+const mapDispatchToProps = (dispatch) => {
     return {
-      signOut: () => dispatch(signOut())
+        signOut: () => dispatch(signOut())
     }
-  }
+}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

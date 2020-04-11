@@ -5,8 +5,10 @@ class CreateSession extends Component {
 
     constructor(props) {
         super(props);
+        let today = new Date();
+        let now = today.getHours() + ':' + today.getMinutes();
         this.state = {
-            time: '',
+            time: now,
             location: '',
             subject: '',
             group: ''
@@ -21,8 +23,8 @@ class CreateSession extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        console.log('submitted')
-        console.table([this.state])
+        console.table([this.state]);
+        this.props.history.push('/');
     }
 
     render() {
@@ -54,7 +56,7 @@ class CreateSession extends Component {
                     </div>
 
                     <div className="text-center">
-                        <button type="submit" className="btn btn-primary">Start Studying</button>
+                        <button type="submit" className="btn btn-primary" onClick={this.handleSubmit} >Start Studying</button>
                     </div>
                 </form>
             </div>
