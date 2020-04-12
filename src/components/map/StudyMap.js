@@ -57,6 +57,7 @@ class StudyMap extends Component {
         */
         return (
             <Marker
+                key={'currentLocationMarker'}
                 position={this.state.currentLocation}
                 draggable
                 label={{
@@ -75,6 +76,7 @@ class StudyMap extends Component {
 
     render() {
         const { sessions, auth } = this.props;
+
         // if (!auth.uid){
         //     console.log('u not signed in fam')
         //     return <Redirect to='/login' /> 
@@ -95,7 +97,7 @@ class StudyMap extends Component {
                         initialCenter={this.state.currentLocation}
                     >
                         {this.currentLocationMarker()}
-                        <MarkerList sessions={sessions} />
+                        <MarkerList sessions={sessions} key='markerList' />
                     </Map>
                     <CreateSession
                         toggle={this.toggleModal}
@@ -123,7 +125,7 @@ class StudyMap extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        sessions: state.firestore.sessions,
+        sessions: state.firestore.ordered.sessions,
         auth: state.firebase.auth
     }
 }
@@ -132,7 +134,7 @@ const mapStateToProps = (state) => {
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([
-        { collection: 'sessions' },
+        { collection: 'sessions', orderBy: ['createdAt'] }
     ]),
     GoogleApiWrapper({
         apiKey: MAPS_API_KEY
