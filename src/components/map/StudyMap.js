@@ -53,7 +53,6 @@ class StudyMap extends Component {
 
     currentLocationMarker() {
         /*
-            update state when dragged
             don't show when in session
         */
         return (
@@ -98,7 +97,11 @@ class StudyMap extends Component {
                         {this.currentLocationMarker()}
                         <MarkerList sessions={sessions} />
                     </Map>
-                    <CreateSession toggle={this.toggleModal} isOpen={this.state.modal} />
+                    <CreateSession
+                        toggle={this.toggleModal}
+                        isOpen={this.state.modal}
+                        coords={this.state.currentLocation}
+                    />
                 </div>
                 <button
                     className="btn btn-dark center-block"

@@ -27,7 +27,7 @@ class CreateSession extends Component {
     handleSubmit = e => {
         e.preventDefault();
         console.table([this.state]);
-        this.props.createSession(this.state)
+        this.props.createSession({ ...this.state, coords: this.props.coords })
         this.props.toggle();
     }
 
