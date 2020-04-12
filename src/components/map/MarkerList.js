@@ -9,9 +9,8 @@ const MarkerList = props => {
         return props.sessions.map(session => (
             <Marker
                 {...props}
-                session={session}
                 key={session.id}
-                position={{ lat: session.latitude, lng: session.longitude }}
+                position={{ lat: session.coords.lat, lng: session.coords.lng }}
                 label={{
                     text: session.subject,
                     fontWeight: 'bold'

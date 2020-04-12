@@ -83,7 +83,7 @@ class StudyMap extends Component {
             width: '100%',
             height: '95%',
         }
-
+        console.log(sessions)
         return this.state.currentLocation ? (
             <div className="center-block text-center">
                 <div className="container map-container">
