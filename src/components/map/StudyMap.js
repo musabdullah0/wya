@@ -7,6 +7,7 @@ import MAPS_API_KEY from '../../config/mapConfig'
 import MarkerList from './MarkerList'
 import CreateSession from '../sessions/CreateSession'
 import { firestoreConnect } from 'react-redux-firebase'
+import SessionDetails from '../sessions/SessionDetails';
 
 
 class StudyMap extends Component {
@@ -15,7 +16,9 @@ class StudyMap extends Component {
         super(props);
         this.state = {
             currentLocation: null,
-            modal: false
+            createSessionModal: false,
+            sessionDetailsModal: false,
+            selectedSession: null
         }
     }
 
@@ -69,8 +72,19 @@ class StudyMap extends Component {
         );
     }
 
-    toggleModal = () => {
-        this.setState({ modal: !this.state.modal })
+    toggleCreateSessionModal = () => {
+        this.setState({ createSessionModal: !this.state.createSessionModal })
+    }
+
+    toggleSessionDetailsModal = () => {
+        this.setState({ sessionDetailsModal: !this.state.sessionDetailsModal })
+    }
+
+    handleMarkerClick = (session) => {
+        this.setState({
+            sessionDetailsModal: true,
+            selectedSession: session
+        })
     }
 
 
@@ -85,7 +99,6 @@ class StudyMap extends Component {
             width: '100%',
             height: '95%',
         }
-        console.log(sessions)
         return this.state.currentLocation ? (
             <div className="center-block text-center">
                 <div className="container map-container">
@@ -97,18 +110,23 @@ class StudyMap extends Component {
                         initialCenter={this.state.currentLocation}
                     >
                         {this.currentLocationMarker()}
-                        <MarkerList sessions={sessions} key='markerList' />
+                        <MarkerList sessions={sessions} key='markerList' onClick={this.handleMarkerClick} />
                     </Map>
                     <CreateSession
-                        toggle={this.toggleModal}
-                        isOpen={this.state.modal}
+                        toggle={this.toggleCreateSessionModal}
+                        isOpen={this.state.createSessionModal}
                         coords={this.state.currentLocation}
+                    />
+                    <SessionDetails
+                        session={this.state.selectedSession}
+                        toggle={this.toggleSessionDetailsModal}
+                        isOpen={this.state.sessionDetailsModal}
                     />
                 </div>
                 <button
                     className="btn btn-dark center-block"
                     id="study-btn"
-                    onClick={this.toggleModal}
+                    onClick={this.toggleCreateSessionModal}
                 >
                     Start Studying
                 </button>
