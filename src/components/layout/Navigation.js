@@ -26,7 +26,6 @@ class Navigation extends Component {
             expanded: false,
         };
         this.signedInLinks = [
-            { href: '/create', text: 'study' },
             { href: '/add-friend', text: 'add friend' },
             { href: '/about', text: 'about' },
             { href: '/contact', text: 'contact' },

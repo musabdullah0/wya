@@ -17,13 +17,12 @@ class App extends Component {
                 <Navigation />
                 <Switch>
                     <Route exact path='/' component={StudyMap} />
-                    <Route path='/create' component={CreateSession} />
                     <Route path='/about' component={About} />
                     <Route path='/contact' component={Contact} />
-                    <Route path = '/add-friend' component={AddFriend}/>
+                    <Route path='/add-friend' component={AddFriend} />
                     {/* logged out links*/}
-                    <Route path ='/login' component={LogIn} />
-                    <Route path = '/signup' component={SignUp}/>
+                    <Route path='/login' component={LogIn} />
+                    <Route path='/signup' component={SignUp} />
                 </Switch>
             </BrowserRouter>
         );
