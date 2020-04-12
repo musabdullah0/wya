@@ -4,13 +4,15 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import MAPS_API_KEY from '../../config/mapConfig'
 import MarkerList from './MarkerList'
+import CreateSession from '../sessions/CreateSession'
 
 class StudyMap extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            currentLocation: null
+            currentLocation: null,
+            modal: false
         }
     }
 
@@ -37,7 +39,6 @@ class StudyMap extends Component {
     }
 
     currentLocationMarker() {
-        console.log('dropped current location marker')
         return (
             <Marker
                 position={this.state.currentLocation}
@@ -50,8 +51,8 @@ class StudyMap extends Component {
         );
     }
 
-    startStudying = () => {
-        console.log('start studying button pressed')
+    toggleModal = () => {
+        this.setState({ modal: !this.state.modal })
     }
 
 
@@ -79,11 +80,12 @@ class StudyMap extends Component {
                         {this.currentLocationMarker()}
                         <MarkerList sessions={sessions} />
                     </Map>
+                    <CreateSession toggle={this.toggleModal} isOpen={this.state.modal} />
                 </div>
                 <button
                     className="btn btn-dark center-block"
                     id="study-btn"
-                    onClick={this.startStudying}
+                    onClick={this.toggleModal}
                 >
                     Start Studying
                 </button>
