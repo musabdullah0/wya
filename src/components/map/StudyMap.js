@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
+import { Spinner } from 'reactstrap';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import MAPS_API_KEY from '../../config/mapConfig'
 import MarkerList from './MarkerList'
 import CreateSession from '../sessions/CreateSession'
+import { firestoreConnect } from 'react-redux-firebase'
+
 
 class StudyMap extends Component {
 
@@ -38,7 +41,21 @@ class StudyMap extends Component {
         }
     }
 
+    markerMoved = (markerProps, marker, coord) => {
+        const { latLng } = coord;
+        this.setState({
+            currentLocation: {
+                lat: latLng.lat(),
+                lng: latLng.lng()
+            }
+        })
+    }
+
     currentLocationMarker() {
+        /*
+            update state when dragged
+            don't show when in session
+        */
         return (
             <Marker
                 position={this.state.currentLocation}
@@ -47,6 +64,7 @@ class StudyMap extends Component {
                     text: 'Drag to Current Location',
                     fontWeight: 'bold'
                 }}
+                onDragend={this.markerMoved}
             />
         );
     }
@@ -91,20 +109,28 @@ class StudyMap extends Component {
                 </button>
             </div>
         ) : (
-                <div>Loading...</div>
+                <div className="jumbotron d-flex align-items-center min-vh-100">
+                    <div className="container text-center">
+                        <Spinner color="dark" />
+                    </div>
+                </div>
             )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        sessions: state.session.sessions,
+        sessions: state.firestore.sessions,
         auth: state.firebase.auth
     }
 }
 
+
 export default compose(
     connect(mapStateToProps),
+    firestoreConnect([
+        { collection: 'sessions' },
+    ]),
     GoogleApiWrapper({
         apiKey: MAPS_API_KEY
     }))

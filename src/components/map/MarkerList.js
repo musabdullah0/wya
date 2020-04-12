@@ -18,6 +18,8 @@ const MarkerList = props => {
                 }}
             />
         ))
+    } else {
+        return null;
     }
 }
 

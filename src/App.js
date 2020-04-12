@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
 import Navigation from './components/layout/Navigation'
 import About from './components/pages/About'
 import Contact from './components/pages/Contact'
-import CreateSession from './components/sessions/CreateSession'
 import StudyMap from './components/map/StudyMap'
 import LogIn from './components/users/LogIn'
 import AddFriend from './components/users/AddFriend'
