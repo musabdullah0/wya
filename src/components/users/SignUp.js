@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 
-import { connect } from 'react-redux'
-import { signUp } from '../../store/actions/authActions'
 import API from '../../config/api';
+
+let bigAuthError = '';
 
 class SignUp extends Component {
   state = {
@@ -23,17 +23,22 @@ class SignUp extends Component {
     await API.post("/user/create", {email: this.state.email, password:this.state.password}).then(res => {
       console.log(res);
       console.log(res.data);
-    }).catch(console.log("error"));
+      bigAuthError = null;
+    }).catch(error=>{
+      console.log(JSON.stringify(error))
+      console.log(error.response.status)
+      if(error.response.status === 400){
+        bigAuthError = 'Invalid entry'
+      }else if(error.response.status === 409){
+        bigAuthError = 'User with that information already exists'
+      }
+    })
 
-    
+    console.log(bigAuthError);
 
   }
   render() {
-    const {auth, authError} = this.props;
-    if (auth.uid) {
-      console.log('already signed in');
-      return <Redirect to='/' />
-    }
+    const authError = bigAuthError;
     return (
       <div className="container mt-5">
       <h1 className="mb-5">Sign Up</h1>
@@ -66,17 +71,5 @@ class SignUp extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.firebase.auth,
-    authError: state.auth.authError
-  }
-}
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signUp: (creds) => dispatch(signUp(creds))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
+export default SignUp

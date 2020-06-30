@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import TimePicker from './TimePicker'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { createSession } from '../../store/actions/sessionActions';
 
 class CreateSession extends Component {
 
@@ -27,8 +26,7 @@ class CreateSession extends Component {
     handleSubmit = e => {
         e.preventDefault();
         console.table([this.state]);
-        this.props.createSession({ ...this.state, coords: this.props.coords })
-        this.props.toggle();
+
     }
 
     render() {
@@ -76,10 +74,4 @@ class CreateSession extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        createSession: (session) => dispatch(createSession(session))
-    }
-}
-
-export default connect(null, mapDispatchToProps)(CreateSession)
+export default CreateSession

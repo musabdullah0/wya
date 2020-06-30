@@ -9,7 +9,6 @@ import {
     NavLink,
 } from 'reactstrap';
 import { connect } from 'react-redux'
-import { signOut } from '../../store/actions/authActions'
 
 
 
@@ -29,7 +28,7 @@ class Navigation extends Component {
             { href: '/add-friend', text: 'add friend' },
             { href: '/about', text: 'about' },
             { href: '/contact', text: 'contact' },
-            { href: '#', text: 'logout', onClick: props.signOut },
+            { href: '#', text: 'logout'},
         ]
         this.signedOutLinks = [
             { href: '/login', text: 'log in' },
@@ -60,17 +59,6 @@ class Navigation extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        auth: state.firebase.auth
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        signOut: () => dispatch(signOut())
-    }
-}
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
+export default Navigation;
