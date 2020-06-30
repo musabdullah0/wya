@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 import { signUp } from '../../store/actions/authActions'
+import API from '../../config/api';
 
 class SignUp extends Component {
   state = {
@@ -16,9 +17,16 @@ class SignUp extends Component {
       [e.target.id]: e.target.value
     })
   }
-  handleSubmit = (e) => {
+  handleSubmit = async e => {
     e.preventDefault();
-    this.props.signUp(this.state)
+    //this.props.signUp(this.state)
+    await API.post("/user/create", {email: this.state.email, password:this.state.password}).then(res => {
+      console.log(res);
+      console.log(res.data);
+    }).catch(console.log("error"));
+
+    
+
   }
   render() {
     const {auth, authError} = this.props;

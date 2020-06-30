@@ -18,10 +18,10 @@
 .env.test.local
 .env.production.local
 
-#api key for maps and firebase
+#api key for maps and firebase and server
 mapConfig.js
 firebaseConfig.js
-
+api.js
 
 npm-debug.log*
 yarn-debug.log*
