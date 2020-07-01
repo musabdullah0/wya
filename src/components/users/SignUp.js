@@ -11,7 +11,24 @@ class SignUp extends Component {
     password: '',
     firstName: '',
     lastName: '',
+    confirmPassword: '',
   }
+
+  validateForm = () =>{
+    if(this.validateEmail() && this.state.confirmPassword===this.state.password){
+      return null
+    }else if(!this.validateEmail() && this.state.confirmPassword === this.state.password){
+      return 'email  wrong'
+    }else{
+      return 'passwords do not match'
+    }
+  }
+
+  validateEmail = () => {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(this.state.email).toLowerCase());
+}
+
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value
@@ -20,20 +37,27 @@ class SignUp extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     //this.props.signUp(this.state)
-    await API.post("/user/create", {email: this.state.email, password:this.state.password}).then(res => {
-      console.log(res);
-      console.log(res.data);
-      bigAuthError = null;
-    }).catch(error=>{
-      console.log(JSON.stringify(error))
-      console.log(error.response.status)
-      if(error.response.status === 400){
-        bigAuthError = 'Invalid entry'
-      }else if(error.response.status === 409){
-        bigAuthError = 'User with that information already exists'
-      }
-    })
-
+    const res = this.validateForm()
+    console.log(res)
+    if(res === null){
+      await API.post("/user/create", {email: this.state.email, password:this.state.password}).then(res => {
+        console.log(res);
+        console.log(res.data);
+        bigAuthError = null;
+      }).catch(error=>{
+        console.log(JSON.stringify(error))
+        console.log(error.response.status)
+        if(error.response.status === 400){
+          bigAuthError = 'Invalid entry'
+        }else if(error.response.status === 409){
+          bigAuthError = 'User with that information already exists'
+        }
+      })
+    }else if(res === 'email  wrong'){
+      bigAuthError = 'That email is invalid'
+    }else{
+      bigAuthError = 'Passwords do not match'
+    }
     console.log(bigAuthError);
 
   }
@@ -57,6 +81,11 @@ class SignUp extends Component {
         <div className="form-group">
           <label htmlFor="password" className="form-label">Password</label>
           <input placeholder="password" className="form-control" type="password" id='password' onChange={this.handleChange} />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="password" className="form-label">Confirm Password</label>
+          <input placeholder="password" className="form-control" type="password" id='confirmPassword' onChange={this.handleChange} />
         </div>
 
         <div className="text-center mt-5">

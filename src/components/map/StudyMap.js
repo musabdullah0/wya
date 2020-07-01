@@ -141,20 +141,6 @@ class StudyMap extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        sessions: state.firestore.ordered.sessions,
-        auth: state.firebase.auth
-    }
-}
 
 
-export default compose(
-    connect(mapStateToProps),
-    firestoreConnect([
-        { collection: 'sessions', orderBy: ['createdAt'] }
-    ]),
-    GoogleApiWrapper({
-        apiKey: MAPS_API_KEY
-    }))
-    (StudyMap)
+export default StudyMap
